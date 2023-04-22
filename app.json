@@ -19,9 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
+        "config":{
+          "googleMaps":{
+            "apiKey":"AIzaSyBIhqLhAQ8neTi0XbEdxJYekSAsE9qGVwY"
+          }
+        },
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.deepanshu_dua5.NativeDeviceFeature"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,10 +39,14 @@
       [
         "expo-image-picker",
         {
-    
           "cameraPermission": "The app needs access to your CAMERA in order to take photos of your favorite places."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8815b0ef-406c-406e-bc5a-2732c592f841"
+      }
+    }
   }
 }

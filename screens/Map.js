@@ -2,24 +2,24 @@ import { useCallback, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import IconButton from "../components/UI/IconButton";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 function Map({ navigation, route }) {
-  const initialLocation = route.params&&{
-    lat:route.params.initialLat,
-    lng:route.params.initialLng,
+  const initialLocation = route.params && {
+    lat: route.params.initialLat,
+    lng: route.params.initialLng,
   };
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
-  
 
   const region = {
-    latitude: initialLocation? initialLocation.lat: 28.6780399,
-    longitude:initialLocation? initialLocation.lng: 77.0603757,
+    latitude: initialLocation ? initialLocation.lat : 28.6780399,
+    longitude: initialLocation ? initialLocation.lng : 77.0603757,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
 
   function selectLocationHandler(event) {
-    if(initialLocation){
+    if (initialLocation) {
       return;
     }
     // console.log(event);
@@ -45,7 +45,7 @@ function Map({ navigation, route }) {
   }, [navigation, selectedLocation]);
 
   useLayoutEffect(() => {
-    if(initialLocation){
+    if (initialLocation) {
       return;
     }
     navigation.setOptions({
@@ -58,16 +58,18 @@ function Map({ navigation, route }) {
         />
       ),
     });
-  }, [navigation, savePickedLocationHandler,initialLocation]);
+  }, [navigation, savePickedLocationHandler, initialLocation]);
 
   return (
     <MapView
+      // provider = "PROVIDER_GOOGLE"
       style={styles.map}
       initialRegion={region}
       onPress={selectLocationHandler}
     >
       {selectedLocation && (
         <Marker
+        provider={PROVIDER_GOOGLE}
           title="Picked Location"
           coordinate={{
             latitude: selectedLocation.lat,
