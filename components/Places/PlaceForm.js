@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import {
+  Alert,
   FlatList,
   ScrollView,
   StyleSheet,
@@ -16,9 +17,8 @@ import LocationPicker from "./LocationPicker";
 
 function PlaceForm({ onCreatePlace }) {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [selectedImage, setSelectedImage] = useState();
-  const [pickedLocation, setPickedLocation] = useState();
-
+  const [selectedImage, setSelectedImage] = useState("");
+  const [pickedLocation, setPickedLocation] = useState("");
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
   }
@@ -33,6 +33,25 @@ function PlaceForm({ onCreatePlace }) {
 
   function savePlaceHandler() {
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+    console.log(placeData);
+    const titleIsValid = placeData.title.trim().length > 0;
+    const imageIsValid = placeData.imageUri.trim().length > 0;
+    const isValid = typeof(placeData.location.lat);
+    const isValidLat = String(isValid)==="number";
+
+
+    console.log(titleIsValid);
+    console.log(imageIsValid);
+    console.log(isValidLat);
+    console.log(placeData.address + "".length);
+    console.log(placeData.location.lat)
+    // console.log(placeData.address.length)
+    // const latIsvalat = !isNaN(placeData.location.lat ) && placeData.location.lat>0;
+    // const latIsvalng = !isNaN(placeData.location.lng ) && placeData.location.lng>0;
+    if (!isValidLat|| !titleIsValid || !imageIsValid) {
+      return Alert.alert("Invalid input", "Please check your input values");
+    }
+
     onCreatePlace(placeData);
   }
 
@@ -49,9 +68,7 @@ function PlaceForm({ onCreatePlace }) {
       <ImagePicker onTakeImage={takeImageHandler} />
       <LocationPicker onPickLocation={pickLocationHandler} />
       <View style={styles.button}>
-        <Button  onPress={savePlaceHandler}>
-          Add Place
-        </Button>
+        <Button onPress={savePlaceHandler}>Add Place</Button>
       </View>
     </ScrollView>
   );
@@ -80,8 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary100,
     borderRadius: 4,
   },
-  button:{
-    marginBottom:24,
-
-  }
+  button: {
+    marginBottom: 24,
+  },
 });

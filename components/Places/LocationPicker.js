@@ -13,8 +13,10 @@ import {
   useRoute,
   useIsFocused,
 } from "@react-navigation/native";
+import LoadingOverlay from "../UI/LoadingOverlay";
 
 function LocationPicker({ onPickLocation }) {
+  const [isLocating, setIsLocating] = useState(false);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   const route = useRoute();
@@ -72,16 +74,19 @@ function LocationPicker({ onPickLocation }) {
 
   async function getLocationHandler() {
     const hasPermission = await verifyPermission();
+
     if (!hasPermission) {
       return;
     }
-    
+
+    setIsLocating(true);
     const location = await getCurrentPositionAsync();
     // console.log(location);
     setPickedLocation({
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
+    setIsLocating(false);
   }
 
   function pickOnMapHandler() {
@@ -97,6 +102,21 @@ function LocationPicker({ onPickLocation }) {
           uri: getMapPreview(pickedLocation.lat, pickedLocation.lng),
         }}
       />
+    );
+  }
+  if (isLocating) {
+    return (
+      <>
+        <LoadingOverlay />
+        <View style={styles.actions}>
+          <OutlinedButton icon="location" onPress={getLocationHandler}>
+            Locate User
+          </OutlinedButton>
+          <OutlinedButton icon="map" onPress={pickOnMapHandler}>
+            Pick on Map
+          </OutlinedButton>
+        </View>
+      </>
     );
   }
   return (

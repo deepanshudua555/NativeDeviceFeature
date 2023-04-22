@@ -46,7 +46,7 @@ export function insetPlace(place) {
         }, //first parameter is transaction execured
         (_, error) => {
           console.log(error);
-          //   reject(error);
+            reject(error);
         }
       );
     });

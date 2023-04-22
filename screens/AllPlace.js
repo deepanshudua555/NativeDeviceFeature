@@ -6,7 +6,6 @@ import { fetchPlaces } from "../util/database";
 
 function AllPlaces({route}){
     const [loadedPlaces, setLoadedPlaces]  = useState([]);
-    
     const isFocused = useIsFocused();
 
     useEffect(()=>{
