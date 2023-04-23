@@ -110,7 +110,7 @@ function LocationPicker({ onPickLocation }) {
         <LoadingOverlay />
         <View style={styles.actions}>
           <OutlinedButton icon="location" onPress={getLocationHandler}>
-            Locate User
+          Locating  You
           </OutlinedButton>
           <OutlinedButton icon="map" onPress={pickOnMapHandler}>
             Pick on Map
@@ -124,7 +124,7 @@ function LocationPicker({ onPickLocation }) {
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
         <OutlinedButton icon="location" onPress={getLocationHandler}>
-          Locate User
+          Locate Me
         </OutlinedButton>
         <OutlinedButton icon="map" onPress={pickOnMapHandler}>
           Pick on Map

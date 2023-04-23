@@ -3,6 +3,7 @@ import { Alert, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import IconButton from "../components/UI/IconButton";
 import { PROVIDER_GOOGLE } from "react-native-maps";
+// import MapboxGL from "@react-native-mapbox-gl/maps";
 
 function Map({ navigation, route }) {
   const initialLocation = route.params && {
@@ -63,13 +64,13 @@ function Map({ navigation, route }) {
   return (
     <MapView
       // provider = "PROVIDER_GOOGLE"
+      provider={PROVIDER_GOOGLE}
       style={styles.map}
       initialRegion={region}
       onPress={selectLocationHandler}
     >
       {selectedLocation && (
         <Marker
-        provider={PROVIDER_GOOGLE}
           title="Picked Location"
           coordinate={{
             latitude: selectedLocation.lat,
