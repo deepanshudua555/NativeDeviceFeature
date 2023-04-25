@@ -75,9 +75,9 @@ function PlaceDetails({ route, navigation }) {
         <View style={styles.addressContainer}>
           <Text style={styles.address}>{fetchedPlace.address}</Text>
         </View>
-        {/* <OutlinedButton icon="map" onPress={showOnMapHandler}>
+        <OutlinedButton icon="map" onPress={showOnMapHandler}>
           View onMap
-        </OutlinedButton> */}
+        </OutlinedButton>
 
         <OutlinedButton icon="trash" onPress={deletePlaceHandler}>
           Delete this Place
