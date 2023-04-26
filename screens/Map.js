@@ -1,5 +1,5 @@
 import { useCallback, useLayoutEffect, useState } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import IconButton from "../components/UI/IconButton";
 import { PROVIDER_GOOGLE } from "react-native-maps";
@@ -62,23 +62,25 @@ function Map({ navigation, route }) {
   }, [navigation, savePickedLocationHandler, initialLocation]);
 
   return (
-    <MapView
-      // provider = "PROVIDER_GOOGLE"
-      provider={PROVIDER_GOOGLE}
-      style={styles.map}
-      initialRegion={region}
-      onPress={selectLocationHandler}
-    >
-      {selectedLocation && (
-        <Marker
-          title="Picked Location"
-          coordinate={{
-            latitude: selectedLocation.lat,
-            longitude: selectedLocation.lng,
-          }}
-        />
-      )}
-    </MapView>
+   
+      <MapView
+        // provider = "PROVIDER_GOOGLE"
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        initialRegion={region}
+        onPress={selectLocationHandler}
+      >
+        {selectedLocation && (
+          <Marker
+            title="Picked Location"
+            coordinate={{
+              latitude: selectedLocation.lat,
+              longitude: selectedLocation.lng,
+            }}
+          />
+        )}
+      </MapView>
+    
   );
 }
 
@@ -88,4 +90,7 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
+  container:{
+    flex:1,
+  }
 });
